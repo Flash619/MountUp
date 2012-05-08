@@ -1,0 +1,6 @@
+name: MountUp
+main: com.github.flash619.MountUp.MountUp
+version: ${project.version}
+load: startup
+description: Lets players have mmo styled mounts!
+author: Flash619
