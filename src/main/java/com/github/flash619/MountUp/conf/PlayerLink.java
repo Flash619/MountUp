@@ -24,8 +24,8 @@ public class PlayerLink {
 	    playerMounts = new File(plugin.getDataFolder(), "players.yml");
 	    playerMountsCache = YamlConfiguration.loadConfiguration(playerMounts);
 	}
-    public boolean addplayerMounts(String player, String mount){      //START CODE THAT WILL UNDERGO REFACING
-		String[] MountsRef = Mounts.Mounts;                           //Adds a mount to a players owned list.
+    public boolean addplayerMounts(String player, Integer mount){      //START CODE THAT WILL UNDERGO REFACING
+		Integer[] MountsRef = Mounts.Mounts;                           //Adds a mount to a players owned list.
     		for(int i=0;i < MountsRef.length; i++){                   
     		    if(!playerMountsCache.contains(player+"."+mount)){    
     		    	//TODO Switch up the way that the config for the player is generated and saved, create initial config per player login, reference it here. 
@@ -45,7 +45,7 @@ public class PlayerLink {
     		return false;
     	}
     }
-    public static boolean PlayerHasMount(String player,String mount){//Returns if a player owns a specific mount
+    public static boolean PlayerHasMount(String player,Integer mount){//Returns if a player owns a specific mount
     	try{
     		if(playerMountsCache.contains(player+"."+mount)){
     			return true;
@@ -68,7 +68,7 @@ public class PlayerLink {
     		SEVERE.notice(1);
     	}
     }
-    public void addPlayerMount(String player, String mount){       //Adds a mount to a players list, if the player already has that mount, the request will be ignored.
+    public void addPlayerMount(String player, Integer mount){       //Adds a mount to a players list, if the player already has that mount, the request will be ignored.
     	if(ContainsPlayer(player)){
     		if(!PlayerHasMount(player,mount)){
     		playerMountsCache.set(player+"."+mount,true);

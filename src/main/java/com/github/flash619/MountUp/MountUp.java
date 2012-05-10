@@ -3,8 +3,10 @@ package com.github.flash619.MountUp;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.github.flash619.MountUp.commands.IgnoreMounts;
 import com.github.flash619.MountUp.conf.ConfigLink;
 import com.github.flash619.MountUp.conf.PlayerLink;
 import com.github.flash619.MountUp.listeners.Login;
@@ -18,6 +20,7 @@ public class MountUp extends JavaPlugin{
 	 */
 	
 	private static String version; //Holds MountUp's Version
+	private IgnoreMounts IgnoreMountsExecutor;
 	
 	static {
 		getVersion();              //Ask for the version
@@ -37,8 +40,11 @@ public class MountUp extends JavaPlugin{
 		Config.InitialLoad();
 		PlayerConf.InitializeClass();
 		LoginListener = new Login(this);
+		IgnoreMountsExecutor = new IgnoreMounts(this);
+		
 		Bukkit.getServer().getPluginManager().registerEvents(LoginListener, this);
 		Bukkit.getServer().getPluginManager().registerEvents(EggListener, this);
+		getCommand("IgnoreMounts").setExecutor(IgnoreMountsExecutor);
 		
 	}
 	

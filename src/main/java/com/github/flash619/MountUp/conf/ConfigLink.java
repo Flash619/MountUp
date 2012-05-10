@@ -18,14 +18,13 @@ public class ConfigLink {
 	public void InitialLoad(){
 		final FileConfiguration config = plugin.getConfig();
 		                                                                  //Set default enabled mounts, by default, everything except flying mounts aka enderdragon.
-		String[] MountsList=Mounts.Mounts;
 		
-		if(MountsList!=null){
-		for(int l=0;l<MountsList.length; l++){
-			if(!MountsList[l].equals(Mounts.Mounts[0])){
-		config.addDefault("General.AllowedMounts."+MountsList[l], true);
+		if(Mounts.Mounts!=null){
+		for(int l=0;l<Mounts.Mounts.length; l++){
+			if(!Mounts.Mounts[l].equals(Mounts.Mounts[0])){
+		config.addDefault("General.AllowedMounts."+Mounts.Mounts[l], true);
 			}else{
-		config.addDefault("General.AllowedMounts."+MountsList[l], false);		
+		config.addDefault("General.AllowedMounts."+Mounts.Mounts[l], false);		
 			}
 		}
 		

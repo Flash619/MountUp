@@ -17,9 +17,9 @@ public class Login implements Listener{
 	}
 	
 	@EventHandler(priority = EventPriority.HIGHEST)
-	public void onLogin(PlayerJoinEvent event){
-		Player PlayerRaw = event.getPlayer();
-		String player = PlayerRaw.getName();
+	public void onLogin(PlayerJoinEvent event){ //
+		Player PlayerRaw = event.getPlayer();   //Finds if a player is listed in the player.yml, if not it adds them.
+		String player = PlayerRaw.getName();    ///
 		if(!PlayerLink.ContainsPlayer(player)){
 			PlayerLink.addPlayer(player);
 		}

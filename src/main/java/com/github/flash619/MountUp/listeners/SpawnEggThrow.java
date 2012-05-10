@@ -1,13 +1,17 @@
 package com.github.flash619.MountUp.listeners;
 
-import org.bukkit.entity.Egg;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+
+import Utils.Permissions;
 
 import com.github.flash619.MountUp.MountUp;
+import com.github.flash619.MountUp.Reference.Mounts;
+import com.github.flash619.MountUp.commands.IgnoreMounts;
 
 public class SpawnEggThrow implements Listener{
 	
@@ -18,13 +22,31 @@ public class SpawnEggThrow implements Listener{
 	}
 	
 	@EventHandler(priority = EventPriority.HIGHEST)
-	public void onThrow(CreatureSpawnEvent event){
-		if(event.getSpawnReason().equals("SPAWNER_EGG")){
-			
-			event.getEntity()
+	public void onThrow(PlayerInteractEvent event){
+		Player player=event.getPlayer();
+		if (player.getItemInHand().getType() == Material.MONSTER_EGG) {
+		if(!IgnoreMounts.IsIgnoring(player)){
+		    if(IsValidEgg(player)){
+		    	//TODO Link to second stage mount creation events.
+		    }
 		}
-		String Eggy = eggtype.toString();
-		player
+		}
+		
+	}
+	public boolean IsValidEgg(Player player){
+			Short ID = player.getItemInHand().getDurability();
+			Integer IDI = ID.intValue();
+			System.out.println(IDI);
+			//if(Permissions.hasEggPerm(player, IDI)){ //TODO Remove the commented permission nodes upon release.
+			for(Integer i=0;i<Mounts.Mounts.length;i++){
+				if(IDI==Mounts.Mounts[i]){
+					return true;
+				}
+			}
+			return false;
+			//}else{
+			//	return false;
+			//}
 	}
 
 }

@@ -4,7 +4,7 @@
 
   <groupId>com.github.flash619</groupId>
   <artifactId>MountUp</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.2.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>MountUp</name>

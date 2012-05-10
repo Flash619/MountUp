@@ -4,3 +4,7 @@ version: ${project.version}
 load: startup
 description: Lets players have mmo styled mounts!
 author: Flash619
+commands:
+  IgnoreMounts:
+    description: Makes spawn eggs work as normal by ignoring.
+    usage: /<command>
