@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.007" errors="0" skipped="0" tests="1" name="com.github.flash619.MountUp.AppTest">
+<testsuite failures="0" time="0.008" errors="0" skipped="0" tests="1" name="com.github.flash619.MountUp.AppTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.6.0_31\jre\bin"/>
@@ -19,7 +19,7 @@
     <property name="basedir" value="C:\Users\Flash619\workspace\MountUp"/>
     <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.6.0_31\jre\lib\endorsed"/>
     <property name="os.arch" value="amd64"/>
-    <property name="surefire.real.class.path" value="C:\Users\Flash619\workspace\MountUp\target\surefire\surefirebooter6312368599483977943.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Flash619\workspace\MountUp\target\surefire\surefirebooter671882634938564055.jar"/>
     <property name="java.io.tmpdir" value="C:\Users\Flash619\AppData\Local\Temp\"/>
     <property name="line.separator" value="
 "/>
@@ -43,7 +43,7 @@
     <property name="java.vm.specification.version" value="1.0"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="C:\Program Files\Java\jdk1.6.0_31\jre"/>
-    <property name="sun.java.command" value="C:\Users\Flash619\workspace\MountUp\target\surefire\surefirebooter6312368599483977943.jar C:\Users\Flash619\workspace\MountUp\target\surefire\surefire2968665622280167725tmp C:\Users\Flash619\workspace\MountUp\target\surefire\surefire7135932560464963270tmp"/>
+    <property name="sun.java.command" value="C:\Users\Flash619\workspace\MountUp\target\surefire\surefirebooter671882634938564055.jar C:\Users\Flash619\workspace\MountUp\target\surefire\surefire7886504999133071060tmp C:\Users\Flash619\workspace\MountUp\target\surefire\surefire7644233071118828994tmp"/>
     <property name="java.specification.vendor" value="Sun Microsystems Inc."/>
     <property name="user.language" value="en"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>

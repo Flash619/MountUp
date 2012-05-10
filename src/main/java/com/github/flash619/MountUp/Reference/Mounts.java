@@ -4,7 +4,7 @@ import com.github.flash619.MountUp.MountUp;
 
 public class Mounts {
 	
-		private static MountUp plugin;
+		public static MountUp plugin;
 		public Mounts(MountUp plugin){
 
 		}

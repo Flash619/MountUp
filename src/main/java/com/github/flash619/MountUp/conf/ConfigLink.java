@@ -2,6 +2,8 @@ package com.github.flash619.MountUp.conf;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
+import Utils.SEVERE;
+
 import com.github.flash619.MountUp.MountUp;
 import com.github.flash619.MountUp.Reference.Mounts;
 
@@ -15,31 +17,37 @@ public class ConfigLink {
 	
 	public void InitialLoad(){
 		final FileConfiguration config = plugin.getConfig();
-		//Set default enabled mounts, by default, all are enabled.
-		String[] defEnabled=defEnabledMounts();
+		                                                                  //Set default enabled mounts, by default, everything except flying mounts aka enderdragon.
+		String[] MountsList=Mounts.Mounts;
 		
-		if(defEnabledMounts()!=null){ //Any Enabled?
-		for(int l=0;l<Mounts.Mounts.length; l++){
-		config.addDefault("General.AllowedMounts", defEnabled[l]);
+		if(MountsList!=null){
+		for(int l=0;l<MountsList.length; l++){
+			if(!MountsList[l].equals(Mounts.Mounts[0])){
+		config.addDefault("General.AllowedMounts."+MountsList[l], true);
+			}else{
+		config.addDefault("General.AllowedMounts."+MountsList[l], false);		
+			}
 		}
 		
 		}
-		config.options().copyDefaults(true);
+		config.options().copyDefaults(true);                           //copy the new defaults to the file.
 		plugin.saveConfig();
 	}
-	
-	public String[] defEnabledMounts(){
-		String[] enabled = new String[6];
-		if(enabled.equals(null)){
-			for(int i=0;i < enabled.length; i++){
-				if(!Mounts.Mounts.equals(null)){ //Trying to avoid throwing an exception...
-				enabled[i]=Mounts.Mounts[i];
-				}
-			}
-			return enabled;
+	public boolean isEnabled(String mount){                            //Check to see if a mount is enabled.
+		final FileConfiguration config = plugin.getConfig();
+		try{
+		if(config.contains("General.AllowedMounts."+mount)){
+		if(config.getBoolean("General.AllowedMounts."+mount)){
+			return true;
 		}else{
-			//no need to reconfigure already existent defaults.
-			return enabled;
+			return false;
+		}
+		}else{
+			return false;
+		}
+		}catch(NullPointerException e){
+			SEVERE.error(4);
+			return false;
 		}
 	}
 
