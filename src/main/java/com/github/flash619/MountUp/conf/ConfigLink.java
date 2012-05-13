@@ -2,7 +2,7 @@ package com.github.flash619.MountUp.conf;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
-import Utils.SEVERE;
+import com.github.flash619.MountUp.Utils.SEVERE;
 
 import com.github.flash619.MountUp.MountUp;
 import com.github.flash619.MountUp.Reference.Mounts;

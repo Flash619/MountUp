@@ -6,7 +6,7 @@ import java.io.IOException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import Utils.SEVERE;
+import com.github.flash619.MountUp.Utils.SEVERE;
 
 import com.github.flash619.MountUp.MountUp;
 
