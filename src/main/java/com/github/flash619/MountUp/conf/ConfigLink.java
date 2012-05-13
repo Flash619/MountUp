@@ -14,11 +14,11 @@ public class ConfigLink {
 	public ConfigLink(MountUp plugin){
 		ConfigLink.plugin = plugin;
 	}
-	
+	/**
+	 * Loads the intial config and adds the defaults, should only be ran at startup!
+	 */
 	public void InitialLoad(){
 		final FileConfiguration config = plugin.getConfig();
-		                                                                  //Set default enabled mounts, by default, everything except flying mounts aka enderdragon.
-		
 		if(Mounts.Mounts!=null){
 		for(int l=0;l<Mounts.Mounts.length; l++){
 			if(!Mounts.Mounts[l].equals(Mounts.Mounts[0])){
@@ -29,10 +29,14 @@ public class ConfigLink {
 		}
 		
 		}
-		config.options().copyDefaults(true);                           //copy the new defaults to the file.
+		config.options().copyDefaults(true);
 		plugin.saveConfig();
 	}
-	public boolean isEnabled(String mount){                            //Check to see if a mount is enabled.
+	/**
+	 * @param Durability ID for MountEgg
+	 * @return Returns true if it is enabled, otherwise false.
+	 */
+	public boolean isEnabled(String mount){
 		final FileConfiguration config = plugin.getConfig();
 		try{
 		if(config.contains("General.AllowedMounts."+mount)){

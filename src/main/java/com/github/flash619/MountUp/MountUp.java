@@ -13,7 +13,8 @@ import com.github.flash619.MountUp.listeners.SpawnEggThrow;
 
 
 public class MountUp extends JavaPlugin{
-	/*
+	/**
+	 * @author Flash619
 	 * MountUp by Flash619
 	 * (C)2012 Licensed under the GNU Lesser General Public License v3
 	 */
@@ -22,7 +23,7 @@ public class MountUp extends JavaPlugin{
 	private IgnoreMounts IgnoreMountsExecutor;
 	
 	static {
-		getVersion();              //Ask for the version
+		getVersion();
 	}
 	
 	@Override
@@ -55,7 +56,9 @@ public class MountUp extends JavaPlugin{
 	}
 	
 	
-	
+	/**
+	 * @return Returns the version of the implementation. If unknown it will return '(Unknown)'
+	 */
 	public static String getVersion(){ /*
                                         *Returns MountUp Version
                                         */
