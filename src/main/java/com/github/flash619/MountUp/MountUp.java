@@ -3,7 +3,6 @@ package com.github.flash619.MountUp;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.github.flash619.MountUp.commands.IgnoreMounts;

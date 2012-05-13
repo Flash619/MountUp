@@ -9,7 +9,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import Utils.SEVERE;
 
 import com.github.flash619.MountUp.MountUp;
-import com.github.flash619.MountUp.Reference.Mounts;
 
 public class PlayerLink {
 	public static MountUp plugin;
@@ -20,21 +19,20 @@ public class PlayerLink {
 	public PlayerLink(MountUp plugin){
 		PlayerLink.plugin = plugin;
 	}
-	public void InitializeClass(){                                     //Initial load, called on onEnable !Important!
+	/**
+	 * Sets up the config objects, should only be done once!
+	 * Only use in onEnable
+	 */
+	public void InitializeClass(){
 	    playerMounts = new File(plugin.getDataFolder(), "players.yml");
 	    playerMountsCache = YamlConfiguration.loadConfiguration(playerMounts);
-	}
-    public boolean addplayerMounts(String player, Integer mount){      //START CODE THAT WILL UNDERGO REFACING
-		Integer[] MountsRef = Mounts.Mounts;                           //Adds a mount to a players owned list.
-    		for(int i=0;i < MountsRef.length; i++){                   
-    		    if(!playerMountsCache.contains(player+"."+mount)){    
-    		    	//TODO Switch up the way that the config for the player is generated and saved, create initial config per player login, reference it here. 
-    		    }
-    		
-    	}
-    		return false;
-    }                                                                //END CODE THAT WILL UNDERGO REFACING
-    public static boolean ContainsPlayer(String player){             //Does player.yml contain a key for a player?
+	} 
+	/**
+	 * @param player Players name to check the player.yml for.
+	 * @return true or false.
+	 * Returns if the player.yml contains a key value for the player.
+	 */
+    public static boolean ContainsPlayer(String player){
     	try{
     	if(playerMountsCache.contains(player)){
     		return true;
@@ -45,7 +43,13 @@ public class PlayerLink {
     		return false;
     	}
     }
-    public static boolean PlayerHasMount(String player,Integer mount){//Returns if a player owns a specific mount
+    /**
+     * @param player Players name to check the player.yml for.
+     * @param mount Durability ID of EggMount.
+     * @return true or false.
+     * Returns if a player owns a specific mount
+     */
+    public static boolean PlayerHasMount(String player,Integer mount){
     	try{
     		if(playerMountsCache.contains(player+"."+mount)){
     			return true;
@@ -56,7 +60,11 @@ public class PlayerLink {
     		return false;
     	}
     }
-    public static void addPlayer(String player){                    //Adds a player to a player.yml If the player already exists, it will throw a notice.
+    /**
+     * @param player Players name to check the player.yml for.
+     * Adds a player to a player.yml If the player already exists, it will throw a notice.
+     */
+    public static void addPlayer(String player){
     	try{
     	if(playerMountsCache.contains(player)){
     		SEVERE.notice(1);
@@ -68,7 +76,12 @@ public class PlayerLink {
     		SEVERE.notice(1);
     	}
     }
-    public void addPlayerMount(String player, Integer mount){       //Adds a mount to a players list, if the player already has that mount, the request will be ignored.
+    /**
+     * @param player Players name to check the player.yml for.
+     * @param mount mount Durability ID of EggMount.
+     * Adds a mount to a players list, if the player already has that mount, the request will be ignored.
+     */
+    public static void addPlayerMount(String player, Integer mount){
     	if(ContainsPlayer(player)){
     		if(!PlayerHasMount(player,mount)){
     		playerMountsCache.set(player+"."+mount,true);
@@ -79,7 +92,10 @@ public class PlayerLink {
     	    addPlayerMount(player, mount);
     	}
     	}
-    public static void savePlayersConfig(){                       //Saves the players.yml file
+    /**
+     * Saves the config to file.
+     */
+    public static void savePlayersConfig(){ 
     	try {
 			playerMountsCache.save(playerMounts);
 		} catch (IOException e) {
