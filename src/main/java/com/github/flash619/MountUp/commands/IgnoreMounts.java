@@ -37,7 +37,6 @@ public class IgnoreMounts implements CommandExecutor {
 			IgnoreMounts.remove(player);
 		}
 	}
-	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String buyflight, String[] args){      //COMMAND: Listens for /ignoremounts if called, toggles the ignore on the spawn eggs.
 		if(cmd.getName().equalsIgnoreCase("IgnoreMounts")){
 			if(args.length==0){

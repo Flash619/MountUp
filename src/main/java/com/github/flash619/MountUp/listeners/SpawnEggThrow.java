@@ -49,6 +49,8 @@ public class SpawnEggThrow implements Listener{
 		    		}else{
 		    			event.setCancelled(true);
 		    		}
+		    }else{
+		    	player.sendMessage("You already own that mount! Use /mountup to select and spawn a mount!");
 		    }
 		 }
 	  }	

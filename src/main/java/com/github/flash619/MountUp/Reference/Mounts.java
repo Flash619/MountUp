@@ -1,5 +1,7 @@
 package com.github.flash619.MountUp.Reference;
 
+import org.bukkit.entity.EntityType;
+
 import com.github.flash619.MountUp.MountUp;
 
 public class Mounts {
@@ -21,5 +23,48 @@ public class Mounts {
 				91,//Sheep
 				92 //Cow
 			};
+		public static String[] MountType = new String[]{
+			//This must always be linked to the above table!
+			"WOLF",
+			"SPIDER",
+			"PIG",
+			"SHEEP",
+			"COW"
+		};
+		/**
+		 * @param ID The Durability ID of the mount for referencing.
+		 * @return The CreatureType
+		 */
+		public static EntityType getMountDurRef(Integer ID){
+			if(mountIsValidDur(ID)){
+				EntityType CreatureType = EntityType.fromName(MountType[getMountListPosition(ID)]);
+				return CreatureType;
+			}
+			return null;
+		}
+		/**
+		 * @param ID The Durability ID of the mount for referencing.
+		 * @return The position of the MountID in the Mounts array.
+		 */
+		public static Integer getMountListPosition(Integer ID){
+			for(int i=0;i<Mounts.length;i++){
+				if(ID==Mounts[i]){
+					return i;
+				}
+			}
+			return null;
+		}
+		/**
+		 * @param ID The Durability ID of the mount for referencing.
+		 * @return Whether the mount is contained in the Mounts array.
+		 */
+		public static boolean mountIsValidDur(Integer ID){
+			for(int i=0;i<Mounts.length;i++){
+				if(ID==Mounts[i]){
+					return true;
+				}
+			}
+			return false;
+		}
 
 }

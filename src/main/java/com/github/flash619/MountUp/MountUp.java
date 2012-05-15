@@ -39,7 +39,6 @@ public class MountUp extends JavaPlugin{
 		
 		Config.InitialLoad();
 		PlayerConf.InitializeClass();
-		LoginListener = new Login(this);
 		IgnoreMountsExecutor = new IgnoreMounts(this);
 		
 		Bukkit.getServer().getPluginManager().registerEvents(LoginListener, this);
