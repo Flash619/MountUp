@@ -5,11 +5,13 @@ import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.github.flash619.MountUp.commands.ClearMounts;
 import com.github.flash619.MountUp.commands.IgnoreMounts;
 import com.github.flash619.MountUp.conf.ConfigLink;
 import com.github.flash619.MountUp.conf.PlayerLink;
 import com.github.flash619.MountUp.listeners.Login;
 import com.github.flash619.MountUp.listeners.MountSpawn;
+import com.github.flash619.MountUp.listeners.RightClickMount;
 import com.github.flash619.MountUp.listeners.SpawnEggThrow;
 
 
@@ -28,6 +30,7 @@ public class MountUp extends JavaPlugin{
 	
 	private static String version; //Holds MountUp's Version
 	private IgnoreMounts IgnoreMountsExecutor;
+	private ClearMounts ClearMountsExecutor;
 	
 	static {
 		getVersion();
@@ -35,6 +38,7 @@ public class MountUp extends JavaPlugin{
 	
 	@Override
 	public void onEnable(){
+		Config.InitialLoad();
 		Logger log = this.getLogger();
 		
 		if(Config.isVerboseEnabled()){
@@ -43,19 +47,22 @@ public class MountUp extends JavaPlugin{
 		Login LoginListener = new Login(this);
 		SpawnEggThrow EggListener = new SpawnEggThrow(this);
 		MountSpawn NewMount = new MountSpawn(this);
+		RightClickMount MountToggle = new RightClickMount(this);
 		if(Config.isVerboseEnabled()){
 			log.info("Initializing config objects");
 		}
-		Config.InitialLoad();
 		PlayerLink.InitializeClass();
 		IgnoreMountsExecutor = new IgnoreMounts(this);
+		ClearMountsExecutor = new ClearMounts(this);
 		if(Config.isVerboseEnabled()){
 			log.info("Registering events.");
 		}
 		Bukkit.getServer().getPluginManager().registerEvents(LoginListener, this);
 		Bukkit.getServer().getPluginManager().registerEvents(EggListener, this);
 		Bukkit.getServer().getPluginManager().registerEvents(NewMount, this);
+		Bukkit.getServer().getPluginManager().registerEvents(MountToggle, this);
 		getCommand("IgnoreMounts").setExecutor(IgnoreMountsExecutor);
+		getCommand("ClearMounts").setExecutor(ClearMountsExecutor);
 		
 	}
 	

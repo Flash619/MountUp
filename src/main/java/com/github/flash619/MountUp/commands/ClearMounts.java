@@ -19,11 +19,18 @@ public class ClearMounts  implements CommandExecutor {
 		if(cmd.getName().equalsIgnoreCase("clearmounts")){
 			Player player = (Player) sender;
 			if(SpawnEngine.ActiveMounts.containsKey(player.getName())){
-				ActiveMountsIndex PlayerIndex = (ActiveMountsIndex) SpawnEngine.ActiveMounts.get(player);
-				PlayerIndex.ActiveMount.remove();
-				SpawnEngine.ActiveMounts.remove(player);
-				player.sendMessage(ChatColor.DARK_PURPLE+"INFO: "+ChatColor.GOLD+"Your mount was put away for now.");
-				return true;
+				ActiveMountsIndex PlayerIndex = (ActiveMountsIndex) SpawnEngine.ActiveMounts.get(player.getName());
+				if(!PlayerIndex.ActiveMount.isDead()){
+					PlayerIndex.ActiveMount.eject();
+					PlayerIndex.ActiveMount.remove();
+					SpawnEngine.ActiveMounts.remove(player.getName());
+					player.sendMessage(ChatColor.DARK_PURPLE+"INFO: "+ChatColor.GOLD+"Your mount was put away for now.");
+					return true;
+				}else{
+					 SpawnEngine.ActiveMounts.remove(player.getName());
+					 player.sendMessage(ChatColor.DARK_PURPLE+"INFO: "+ChatColor.GOLD+"Your mount must have been de-spawned or killed, and has been reset.");
+					 return true;
+				}
 			}else{
 				player.sendMessage(ChatColor.DARK_PURPLE+"INFO: "+ChatColor.GOLD+"You don't have any active mounts.");
 				return true;

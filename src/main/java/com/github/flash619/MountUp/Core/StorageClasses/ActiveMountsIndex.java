@@ -6,4 +6,5 @@ import org.bukkit.entity.Player;
 public class ActiveMountsIndex {
 	public LivingEntity ActiveMount = null; //The Mount that the PLAYER owns that is currently active.
 	public Player MountOwner = null; //The player that currently owns the ACTIVEMOUNT.
+	public Integer MountEntityID = null; //The Entity ID for the mount.
 }

@@ -8,3 +8,6 @@ commands:
   IgnoreMounts:
     description: Makes spawn eggs work as normal by ignoring.
     usage: /<command>
+  ClearMounts:
+    description: De Spawns your current mount.
+    usage: /<command>

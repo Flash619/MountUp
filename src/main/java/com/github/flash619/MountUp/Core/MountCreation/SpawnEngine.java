@@ -30,16 +30,19 @@ public class SpawnEngine {
 	 * @param player The player summoning the mount when the SpawnMountEntity was called.
 	 */
 	public static boolean SpawnMountEntity(Location location, Integer ID, Integer SpawnCode, Player player){
-		ActiveMountsIndex AMI = new ActiveMountsIndex();
 		String Key = (player.getName());
 		if(!ActiveMounts.containsKey(Key)){
-			LivingEntity Mount =location.getWorld().spawnCreature(location, Mounts.getMountDurRef(ID));
+			LivingEntity Mount = location.getWorld().spawnCreature(location, Mounts.getMountDurRef(ID));
+			Mount.setPassenger(player);
+			ActiveMountsIndex AMI = new ActiveMountsIndex();
 			AMI.ActiveMount = Mount;
 			AMI.MountOwner = player;
+			AMI.MountEntityID = Mount.getEntityId();
 			ActiveMounts.put(Key, AMI);
 			MountEntitySpawn EntitySpawnEvent = new MountEntitySpawn(Mount,player,location,Key);
 			Bukkit.getServer().getPluginManager().callEvent(EntitySpawnEvent);
 			//TODO Add the rest of the method...do that....tomorrow.  <jokeing, ha, ha, ha...*facedesk*
+			//TODO ADD a listener to listen for entity death, if the entity = a mount entity ID go ahead and remove the entity and player key from the hash map ahead of time.
 			return true;
 		}
 		return false;

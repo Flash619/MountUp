@@ -21,15 +21,23 @@ public class Mounts {
 				52,//Spider
 				90,//Pig
 				91,//Sheep
-				92 //Cow
+				92,//Cow
+				55,//Slime
+				62,//Magma Cube
+				96,//Mooshroom
+				56 //Ghast
 			};
 		public static String[] MountType = new String[]{
-			//This must always be linked to the above table!
+			//This must always be linked to the above table! THESE SHOULD ALWAYS BE REFERENCED FROM THE BUKKIT JAVA DOC OF ENTITY NAMES
 			"WOLF",
 			"SPIDER",
 			"PIG",
 			"SHEEP",
-			"COW"
+			"COW",
+			"SLIME",
+			"MAGMA_CUBE",
+			"MOOSHROOM",
+			"GHAST"
 		};
 		/**
 		 * @param ID The Durability ID of the mount for referencing.
