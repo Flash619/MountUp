@@ -9,6 +9,7 @@ import com.github.flash619.MountUp.commands.IgnoreMounts;
 import com.github.flash619.MountUp.conf.ConfigLink;
 import com.github.flash619.MountUp.conf.PlayerLink;
 import com.github.flash619.MountUp.listeners.Login;
+import com.github.flash619.MountUp.listeners.MountSpawn;
 import com.github.flash619.MountUp.listeners.SpawnEggThrow;
 
 
@@ -18,6 +19,12 @@ public class MountUp extends JavaPlugin{
 	 * MountUp by Flash619
 	 * (C)2012 Licensed under the GNU Lesser General Public License v3
 	 */
+	public static ConfigLink Config;
+	public static PlayerLink PlayerLink;
+	public MountUp(){
+		MountUp.Config = new ConfigLink(this);
+		MountUp.PlayerLink = new PlayerLink(this);
+	}
 	
 	private static String version; //Holds MountUp's Version
 	private IgnoreMounts IgnoreMountsExecutor;
@@ -29,20 +36,25 @@ public class MountUp extends JavaPlugin{
 	@Override
 	public void onEnable(){
 		Logger log = this.getLogger();
-		log.info("MountUp Version " + version + " Loading...");
 		
+		if(Config.isVerboseEnabled()){
+			log.info("Loading event listeners...");
+		}
 		Login LoginListener = new Login(this);
 		SpawnEggThrow EggListener = new SpawnEggThrow(this);
-		
-		ConfigLink Config = new ConfigLink(this);
-		PlayerLink PlayerConf = new PlayerLink(this);
-		
+		MountSpawn NewMount = new MountSpawn(this);
+		if(Config.isVerboseEnabled()){
+			log.info("Initializing config objects");
+		}
 		Config.InitialLoad();
-		PlayerConf.InitializeClass();
+		PlayerLink.InitializeClass();
 		IgnoreMountsExecutor = new IgnoreMounts(this);
-		
+		if(Config.isVerboseEnabled()){
+			log.info("Registering events.");
+		}
 		Bukkit.getServer().getPluginManager().registerEvents(LoginListener, this);
 		Bukkit.getServer().getPluginManager().registerEvents(EggListener, this);
+		Bukkit.getServer().getPluginManager().registerEvents(NewMount, this);
 		getCommand("IgnoreMounts").setExecutor(IgnoreMountsExecutor);
 		
 	}
@@ -50,7 +62,10 @@ public class MountUp extends JavaPlugin{
 	public void onDisable(){
 		Logger log = this.getLogger();
 		log.info("MountUp Version " + version + " Unloading...");
-		PlayerLink.savePlayersConfig();
+		if(Config.isVerboseEnabled()){
+			log.info("Saving player configs.");
+		}
+		com.github.flash619.MountUp.conf.PlayerLink.savePlayersConfig();
 		
 	}
 	

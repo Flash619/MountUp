@@ -21,14 +21,11 @@ public class ConfigLink {
 		final FileConfiguration config = plugin.getConfig();
 		if(Mounts.Mounts!=null){
 		for(int l=0;l<Mounts.Mounts.length; l++){
-			if(!Mounts.Mounts[l].equals(Mounts.Mounts[0])){
 		config.addDefault("General.AllowedMounts."+Mounts.Mounts[l], true);
-			}else{
-		config.addDefault("General.AllowedMounts."+Mounts.Mounts[l], false);		
-			}
 		}
 		
 		}
+		config.addDefault("General.VerboseMode", false);
 		config.options().copyDefaults(true);
 		plugin.saveConfig();
 	}
@@ -36,11 +33,11 @@ public class ConfigLink {
 	 * @param Durability ID for MountEgg
 	 * @return Returns true if it is enabled, otherwise false.
 	 */
-	public boolean isEnabled(String mount){
+	public boolean isEnabledMount(Integer IDI){
 		final FileConfiguration config = plugin.getConfig();
 		try{
-		if(config.contains("General.AllowedMounts."+mount)){
-		if(config.getBoolean("General.AllowedMounts."+mount)){
+		if(config.contains("General.AllowedMounts."+IDI)){
+		if(config.getBoolean("General.AllowedMounts."+IDI)){
 			return true;
 		}else{
 			return false;
@@ -50,6 +47,17 @@ public class ConfigLink {
 		}
 		}catch(NullPointerException e){
 			SEVERE.error(4);
+			return false;
+		}
+	}
+	/**
+	 * @return Whether or not Verbose Mode is enabled. true/false
+	 */
+	public boolean isVerboseEnabled(){
+		final FileConfiguration config = plugin.getConfig();
+		if(config.getBoolean("General.VerboseMode")){
+			return true;
+		}else{
 			return false;
 		}
 	}

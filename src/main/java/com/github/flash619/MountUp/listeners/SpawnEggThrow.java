@@ -13,14 +13,17 @@ import com.github.flash619.MountUp.MountUp;
 import com.github.flash619.MountUp.Core.SummonMount;
 import com.github.flash619.MountUp.Reference.Mounts;
 import com.github.flash619.MountUp.commands.IgnoreMounts;
+import com.github.flash619.MountUp.conf.ConfigLink;
 import com.github.flash619.MountUp.conf.PlayerLink;
 
 public class SpawnEggThrow implements Listener{
 	
 	public static MountUp plugin;
+	public static ConfigLink Config;
 	
 	public SpawnEggThrow(MountUp plugin){
 		SpawnEggThrow.plugin = plugin;
+		SpawnEggThrow.Config = new ConfigLink(plugin);
 	}
 	/**
 	 * @param event The event object taking place.
@@ -49,8 +52,6 @@ public class SpawnEggThrow implements Listener{
 		    		}else{
 		    			event.setCancelled(true);
 		    		}
-		    }else{
-		    	player.sendMessage("You already own that mount! Use /mountup to select and spawn a mount!");
 		    }
 		 }
 	  }	
@@ -58,6 +59,7 @@ public class SpawnEggThrow implements Listener{
 	/**
 	 * @param player The player who used the egg.
 	 * Checks to see if the egg is in the Mounts list, also returns false if the player already has it in the player.yml
+	 * Also checks to see if the mount type is enabled in the config.
 	 */
 	public boolean IsValidEgg(Player player){
 		    String PlayerName = player.getName();
@@ -66,7 +68,7 @@ public class SpawnEggThrow implements Listener{
 			//if(Permissions.hasEggPerm(player, IDI)){ //TODO Remove the commented permission nodes upon release.
 			for(Integer i=0;i<Mounts.Mounts.length;i++){
 				if(IDI==Mounts.Mounts[i]){
-					if(!PlayerLink.PlayerHasMount(PlayerName, IDI)){
+					if(!PlayerLink.PlayerHasMount(PlayerName, IDI)&&(Config.isEnabledMount(IDI))){
 					return true;
 					}else{
 					return false;
