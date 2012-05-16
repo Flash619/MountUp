@@ -1,0 +1,28 @@
+#surefire
+#Sun May 13 00:41:15 CDT 2012
+testClassesDirectory=/home/travis/workspace/MountUp/target/test-classes
+classPathUrl.3=/home/travis/.m2/repository/org/bukkit/bukkit/1.2.5-R1.4/bukkit-1.2.5-R1.4.jar
+classPathUrl.2=/home/travis/.m2/repository/junit/junit/3.8.1/junit-3.8.1.jar
+useManifestOnlyJar=true
+classPathUrl.1=/home/travis/workspace/MountUp/target/classes
+reportsDirectory=/home/travis/workspace/MountUp/target/surefire-reports
+classPathUrl.0=/home/travis/workspace/MountUp/target/test-classes
+dirscanner.0=directoryScannerOptions
+providerConfiguration=org.apache.maven.surefire.junit.JUnit3Provider
+testSuiteDefinitionTestSourceDirectory=/home/travis/workspace/MountUp/src/test/java
+surefireClassPathUrl.1=/home/travis/.m2/repository/org/apache/maven/surefire/surefire-api/2.7.1/surefire-api-2.7.1.jar
+surefireClassPathUrl.0=/home/travis/.m2/repository/org/apache/maven/surefire/surefire-junit3/2.7.1/surefire-junit3-2.7.1.jar
+report.2=org.apache.maven.surefire.report.XMLReporter
+useSystemClassLoader=true
+report.1=org.apache.maven.surefire.report.BriefFileReporter
+report.0=org.apache.maven.surefire.report.ForkingConsoleReporter
+excludes0=**/*$*
+isTrimStackTrace=true
+dirscanner.0.params=/home/travis/workspace/MountUp/target/test-classes|[**/Test*.java, **/*Test.java, **/*TestCase.java]|[**/*$*]
+enableAssertions=true
+includes2=**/*TestCase.java
+failIfNoTests=false
+includes1=**/*Test.java
+dirscanner.0.types=java.io.File|java.util.ArrayList|java.util.ArrayList
+includes0=**/Test*.java
+childDelegation=false
