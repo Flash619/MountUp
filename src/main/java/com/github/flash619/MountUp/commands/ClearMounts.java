@@ -1,5 +1,6 @@
 package com.github.flash619.MountUp.commands;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -7,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.github.flash619.MountUp.MountUp;
+import com.github.flash619.MountUp.Core.Events.MountDown;
 import com.github.flash619.MountUp.Core.MountCreation.SpawnEngine;
 import com.github.flash619.MountUp.Core.StorageClasses.ActiveMountsIndex;
 
@@ -21,7 +23,11 @@ public class ClearMounts  implements CommandExecutor {
 			if(SpawnEngine.ActiveMounts.containsKey(player.getName())){
 				ActiveMountsIndex PlayerIndex = (ActiveMountsIndex) SpawnEngine.ActiveMounts.get(player.getName());
 				if(!PlayerIndex.ActiveMount.isDead()){
-					PlayerIndex.ActiveMount.eject();
+						if(PlayerIndex.ActiveMount.getPassenger()!=null){
+					        PlayerIndex.ActiveMount.eject();
+							MountDown PlayerMountDown = new MountDown(PlayerIndex.ActiveMount,player);
+							Bukkit.getServer().getPluginManager().callEvent(PlayerMountDown);
+						}
 					PlayerIndex.ActiveMount.remove();
 					SpawnEngine.ActiveMounts.remove(player.getName());
 					player.sendMessage(ChatColor.DARK_PURPLE+"INFO: "+ChatColor.GOLD+"Your mount was put away for now.");

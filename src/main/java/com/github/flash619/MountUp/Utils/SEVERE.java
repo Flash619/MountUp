@@ -11,7 +11,9 @@ public class SEVERE {
 	public SEVERE(MountUp plugin){
 		SEVERE.plugin = plugin;
 	}
-	
+	/*
+	 * Standard error logging, these will generally RARELY happen.
+	 */
 	public static void error(Integer type){
 		Logger log = plugin.getLogger();
 		

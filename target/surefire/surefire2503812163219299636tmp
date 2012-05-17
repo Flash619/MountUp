@@ -1,0 +1,5 @@
+#surefire
+#Tue May 15 20:04:15 CDT 2012
+user.dir=/home/travis/workspace/MountUp
+localRepository=/home/travis/.m2/repository
+basedir=/home/travis/workspace/MountUp
