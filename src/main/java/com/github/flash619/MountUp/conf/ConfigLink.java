@@ -19,9 +19,9 @@ public class ConfigLink {
 	 */
 	public void InitialLoad(){
 		final FileConfiguration config = plugin.getConfig();
-		if(Mounts.Mounts!=null){
-		for(int l=0;l<Mounts.Mounts.length; l++){
-		config.addDefault("General.AllowedMounts."+Mounts.Mounts[l], true);
+		if(Mounts.MountName!=null){
+		for(int l=0;l<Mounts.MountName.length; l++){
+		config.addDefault("General.AllowedMounts."+Mounts.MountName[l], true);
 		}
 		
 		}
@@ -36,8 +36,8 @@ public class ConfigLink {
 	public boolean isEnabledMount(Integer IDI){
 		final FileConfiguration config = plugin.getConfig();
 		try{
-		if(config.contains("General.AllowedMounts."+IDI)){
-		if(config.getBoolean("General.AllowedMounts."+IDI)){
+		if(config.contains("General.AllowedMounts."+Mounts.getMountName(IDI))){
+		if(config.getBoolean("General.AllowedMounts."+Mounts.getMountName(IDI))){
 			return true;
 		}else{
 			return false;

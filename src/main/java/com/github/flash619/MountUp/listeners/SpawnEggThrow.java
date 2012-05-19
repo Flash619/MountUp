@@ -1,5 +1,6 @@
 package com.github.flash619.MountUp.listeners;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -7,10 +8,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import com.github.flash619.MountUp.MountUp;
 import com.github.flash619.MountUp.Core.SummonMount;
+import com.github.flash619.MountUp.Core.MountCreation.SpawnEngine;
 import com.github.flash619.MountUp.Reference.Mounts;
 import com.github.flash619.MountUp.commands.IgnoreMounts;
 import com.github.flash619.MountUp.conf.ConfigLink;
@@ -34,12 +37,14 @@ public class SpawnEggThrow implements Listener{
 	 * If the mount is not valid for the spawn egg, or the player already has it, the egg will work as normal,
 	 */
 	@EventHandler(priority = EventPriority.HIGHEST)                        
-	public void onThrow(PlayerInteractEvent event){                        
+	public void onThrow(PlayerInteractEvent event){    
+		if(event.getAction()==Action.RIGHT_CLICK_BLOCK){
 		Player player=event.getPlayer();                                  
 		if (player.getItemInHand().getType() == Material.MONSTER_EGG) { 
 		if(!IgnoreMounts.IsIgnoring(player)){                               
 		    if(IsValidEgg(player)){           
-		    	Block Target = player.getTargetBlock(null, 2);
+		    	Block Target = player.getTargetBlock(null, 3);
+		    	if(SpawnEngine.isValidSpawnTarget(Target)){
 		    	Double Dist = player.getLocation().distance(Target.getLocation());
 		    		if(Dist<=2){
 		    			Location SpawnLoc = Target.getLocation();
@@ -52,9 +57,13 @@ public class SpawnEggThrow implements Listener{
 		    		}else{
 		    			event.setCancelled(true);
 		    		}
+		    	}else{
+		    		player.sendMessage(ChatColor.RED+"[ERROR]: "+ChatColor.GOLD+"Location not suitable for mount spawning.");
+		    	}
 		    }
 		 }
 	  }	
+     }
 	}
 	/**
 	 * @param player The player who used the egg.

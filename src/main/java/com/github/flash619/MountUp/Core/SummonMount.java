@@ -21,7 +21,7 @@ public class SummonMount {
 			if(SpawnEngine.SpawnMountEntity(location, mount, 1, player)){
 				player.sendMessage("Mount spawned successfully!");
 			}else{
-				player.sendMessage("Sorry, but there was an error. Is the mount already active?");
+				player.sendMessage("Sorry, but there was an error. Do you already have a active mount?");
 			//TODO Finish the rest of the StartMount, connect to the Spawn Engine add scheduled events.
 		}
 	}

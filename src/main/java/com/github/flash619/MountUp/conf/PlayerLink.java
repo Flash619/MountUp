@@ -2,10 +2,12 @@ package com.github.flash619.MountUp.conf;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
+import com.github.flash619.MountUp.Reference.Mounts;
 import com.github.flash619.MountUp.Utils.SEVERE;
 
 import com.github.flash619.MountUp.MountUp;
@@ -27,6 +29,26 @@ public class PlayerLink {
 	    playerMounts = new File(plugin.getDataFolder(), "players.yml");
 	    playerMountsCache = YamlConfiguration.loadConfiguration(playerMounts);
 	} 
+	/**
+	 * @param player The player who's mounts are being looked up.
+	 * @return Returns a ArrayList of the players mounts as their ID's
+	 * To get the mounts names, use it in conjunction with Mounts.GetNames(ArrayListOfID's)
+	 */
+	public static ArrayList<Integer> GetOwnedMounts(String player){
+		ArrayList<Integer> OwnedMounts = new ArrayList<Integer>();
+		if(ContainsPlayer(player)){
+			for(int i=0;i<Mounts.Mounts.length;i++){
+				try{
+				if(PlayerHasMount(player,Mounts.Mounts[i])){
+					OwnedMounts.add(Mounts.Mounts[i]);
+				}
+				}catch(NullPointerException e){
+					
+				}
+			}return OwnedMounts;
+		}
+		return OwnedMounts;
+	}
 	/**
 	 * @param player Players name to check the player.yml for.
 	 * @return true or false.

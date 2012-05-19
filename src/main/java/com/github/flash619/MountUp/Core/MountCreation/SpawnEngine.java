@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
@@ -41,12 +43,20 @@ public class SpawnEngine {
 			ActiveMounts.put(Key, AMI);
 			MountEntitySpawn EntitySpawnEvent = new MountEntitySpawn(Mount,player,location,Key);
 			Bukkit.getServer().getPluginManager().callEvent(EntitySpawnEvent);
-			//TODO Add the rest of the method...do that....tomorrow.  <jokeing, ha, ha, ha...*facedesk*
 			//TODO ADD a listener to listen for entity death, if the entity = a mount entity ID go ahead and remove the entity and player key from the hash map ahead of time.
 			return true;
 		}
 		return false;
 		
+	}
+	public static boolean isValidSpawnTarget(Block target){
+    	Block Target1 = target.getRelative(0, +1, 0);
+    	Block Target2 = Target1.getRelative(0, +1, 0);
+    	if(Target1.getType().equals(Material.AIR)&&Target2.getType().equals(Material.AIR)){
+    		return true;
+    	}else{
+    		return false;
+    	}
 	}
 	
 }

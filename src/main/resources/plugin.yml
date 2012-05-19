@@ -5,6 +5,9 @@ load: startup
 description: Lets players have mmo styled mounts!
 author: Flash619
 commands:
+  MountUp:
+    description: Shows current mount, available mounts, and MountUp Info
+    usage: /<command> [info/mount]
   IgnoreMounts:
     description: Makes spawn eggs work as normal by ignoring.
     usage: /<command>

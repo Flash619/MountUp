@@ -1,0 +1,30 @@
+#surefire
+#Fri May 18 14:00:46 CDT 2012
+testClassesDirectory=/home/travis/workspace/MountUp/target/test-classes
+classPathUrl.4=/home/travis/.m2/repository/junit/junit/4.10/junit-4.10.jar
+classPathUrl.3=/home/travis/.m2/repository/org/bukkit/craftbukkit/1.2.5-R2.0/craftbukkit-1.2.5-R2.0.jar
+classPathUrl.2=/home/travis/.m2/repository/org/bukkit/bukkit/1.2.5-R2.0/bukkit-1.2.5-R2.0.jar
+useManifestOnlyJar=true
+classPathUrl.1=/home/travis/workspace/MountUp/target/classes
+reportsDirectory=/home/travis/workspace/MountUp/target/surefire-reports
+classPathUrl.0=/home/travis/workspace/MountUp/target/test-classes
+dirscanner.0=directoryScannerOptions
+providerConfiguration=org.apache.maven.surefire.junit4.JUnit4Provider
+testSuiteDefinitionTestSourceDirectory=/home/travis/workspace/MountUp/src/test/java
+surefireClassPathUrl.1=/home/travis/.m2/repository/org/apache/maven/surefire/surefire-api/2.7.1/surefire-api-2.7.1.jar
+surefireClassPathUrl.0=/home/travis/.m2/repository/org/apache/maven/surefire/surefire-junit4/2.7.1/surefire-junit4-2.7.1.jar
+report.2=org.apache.maven.surefire.report.XMLReporter
+useSystemClassLoader=true
+report.1=org.apache.maven.surefire.report.BriefFileReporter
+report.0=org.apache.maven.surefire.report.ForkingConsoleReporter
+excludes0=**/*$*
+isTrimStackTrace=true
+dirscanner.0.params=/home/travis/workspace/MountUp/target/test-classes|[**/Test*.java, **/*Test.java, **/*TestCase.java]|[**/*$*]
+includes2=**/*TestCase.java
+enableAssertions=true
+failIfNoTests=false
+includes1=**/*Test.java
+dirscanner.0.types=java.io.File|java.util.ArrayList|java.util.ArrayList
+includes0=**/Test*.java
+childDelegation=false
+classPathUrl.5=/home/travis/.m2/repository/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar
