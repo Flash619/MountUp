@@ -11,8 +11,8 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 
 import com.github.flash619.MountUp.MountUp;
 import com.github.flash619.MountUp.Core.Events.MountDown;
-import com.github.flash619.MountUp.Core.MountCreation.SpawnEngine;
 import com.github.flash619.MountUp.Core.StorageClasses.ActiveMountsIndex;
+import com.github.flash619.MountUp.Core.StorageClasses.MountsIndexReference;
 
 public class RightClickMount implements Listener{
 	public static MountUp plugin;
@@ -22,11 +22,11 @@ public class RightClickMount implements Listener{
 	@EventHandler(priority = EventPriority.HIGH)
 	void onClick(PlayerInteractEntityEvent event){
 		Player player = event.getPlayer();
-		if(SpawnEngine.ActiveMounts.containsKey(player.getName())){
+		if(MountsIndexReference.containsKey(player)){
 			player.getTargetBlock(null, 2);
 			Entity RightClickedEntity = event.getRightClicked();
 			Entity Mount = player.getVehicle();
-			ActiveMountsIndex PlayerIndex = (ActiveMountsIndex) SpawnEngine.ActiveMounts.get(player.getName());
+			ActiveMountsIndex PlayerIndex = MountsIndexReference.getPAMI(player);
 			if(Mount!=null){
 				if(RightClickedEntity==Mount){
 					PlayerIndex.ActiveMount.eject();

@@ -10,8 +10,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.github.flash619.MountUp.Core.SummonMount;
-import com.github.flash619.MountUp.Core.MountCreation.SpawnEngine;
 import com.github.flash619.MountUp.Core.StorageClasses.ActiveMountsIndex;
+import com.github.flash619.MountUp.Core.StorageClasses.MountsIndexReference;
 import com.github.flash619.MountUp.Reference.Mounts;
 import com.github.flash619.MountUp.conf.PlayerLink;
 
@@ -26,8 +26,8 @@ public class MountUp implements CommandExecutor {
 		if(cmd.getName().equalsIgnoreCase("mountup")){
 			Player player = (Player) sender;
 			if(args.length==0){
-					if(SpawnEngine.ActiveMounts.containsKey(player.getName())){
-						ActiveMountsIndex PlayerIndex = (ActiveMountsIndex) SpawnEngine.ActiveMounts.get(player.getName());
+					if(MountsIndexReference.containsKey(player)){
+						ActiveMountsIndex PlayerIndex = MountsIndexReference.getPAMI(player);
 				     	player.sendMessage(ChatColor.GOLD+"========================");
 				     	player.sendMessage(ChatColor.DARK_PURPLE+"[ActiveMount]:");
 				     	player.sendMessage(ChatColor.BLUE+PlayerIndex.ActiveMount.getType().getName());
@@ -48,9 +48,12 @@ public class MountUp implements CommandExecutor {
 				String Name = args[0];
 				Integer ID = Mounts.getMountID(Name);
 				if(ID!=null){
+					String MountName = Mounts.getMountName(ID);
+					if(com.github.flash619.MountUp.conf.PlayerLink.PlayerHasMount(player.getName(), MountName)){
 						Location l = player.getLocation();
 						SummonMount.startMount(player, ID, l);
 						return true;
+					}
 				}
 			}
 		}

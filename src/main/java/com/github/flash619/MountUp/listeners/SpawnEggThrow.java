@@ -51,7 +51,8 @@ public class SpawnEggThrow implements Listener{
 		    			String PlayerName = player.getName();
 		    			Short ID = player.getItemInHand().getDurability();
 		    			Integer IDI = ID.intValue();
-		    			PlayerLink.addPlayerMount(PlayerName, IDI);
+		    			String MountName = Mounts.getMountName(IDI);
+		    			PlayerLink.addPlayerMount(PlayerName, MountName);
 		    			SummonMount.startMount(player, IDI, SpawnLoc);
 		    			event.setCancelled(true);
 		    		}else{
@@ -77,7 +78,8 @@ public class SpawnEggThrow implements Listener{
 			//if(Permissions.hasEggPerm(player, IDI)){ //TODO Remove the commented permission nodes upon release.
 			for(Integer i=0;i<Mounts.Mounts.length;i++){
 				if(IDI==Mounts.Mounts[i]){
-					if(!PlayerLink.PlayerHasMount(PlayerName, IDI)&&(Config.isEnabledMount(IDI))){
+					String MountName = Mounts.getMountName(IDI);
+					if(!PlayerLink.PlayerHasMount(PlayerName, MountName)&&(Config.isEnabledMount(IDI))){
 					return true;
 					}else{
 					return false;

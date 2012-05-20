@@ -39,7 +39,7 @@ public class PlayerLink {
 		if(ContainsPlayer(player)){
 			for(int i=0;i<Mounts.Mounts.length;i++){
 				try{
-				if(PlayerHasMount(player,Mounts.Mounts[i])){
+				if(PlayerHasMount(player,Mounts.MountName[i])){
 					OwnedMounts.add(Mounts.Mounts[i]);
 				}
 				}catch(NullPointerException e){
@@ -71,7 +71,7 @@ public class PlayerLink {
      * @return true or false.
      * Returns if a player owns a specific mount
      */
-    public static boolean PlayerHasMount(String player,Integer mount){
+    public static boolean PlayerHasMount(String player,String mount){
     	try{
     		if(playerMountsCache.contains(player+"."+mount)){
     			return true;
@@ -103,7 +103,7 @@ public class PlayerLink {
      * @param mount mount Durability ID of EggMount.
      * Adds a mount to a players list, if the player already has that mount, the request will be ignored.
      */
-    public static void addPlayerMount(String player, Integer mount){
+    public static void addPlayerMount(String player, String mount){
     	if(ContainsPlayer(player)){
     		if(!PlayerHasMount(player,mount)){
     		playerMountsCache.set(player+"."+mount,true);

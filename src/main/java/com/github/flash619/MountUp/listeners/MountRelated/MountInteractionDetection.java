@@ -5,7 +5,6 @@
 package com.github.flash619.MountUp.listeners.MountRelated;
 
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -13,8 +12,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityTargetEvent;
 
 import com.github.flash619.MountUp.MountUp;
-import com.github.flash619.MountUp.Core.MountCreation.SpawnEngine;
 import com.github.flash619.MountUp.Core.StorageClasses.ActiveMountsIndex;
+import com.github.flash619.MountUp.Core.StorageClasses.MountsIndexReference;
 
 
 
@@ -29,8 +28,8 @@ public class MountInteractionDetection implements Listener{
 			if(realEvent.getTarget() instanceof Player){
 			Player[] PlayerList = Bukkit.getServer().getOnlinePlayers();
 			for(int i=0;i<PlayerList.length;i++){
-				if(SpawnEngine.ActiveMounts.containsKey(PlayerList[i].getName())){
-					ActiveMountsIndex PlayerIndex = (ActiveMountsIndex) SpawnEngine.ActiveMounts.get(PlayerList[i].getName());
+				if(MountsIndexReference.containsKey(PlayerList[i])){
+					ActiveMountsIndex PlayerIndex = MountsIndexReference.getPAMI((PlayerList[i]));
 					if(realEvent.getEntity().getEntityId()==PlayerIndex.ActiveMount.getEntityId()){
 						event.setCancelled(true);
 					}
