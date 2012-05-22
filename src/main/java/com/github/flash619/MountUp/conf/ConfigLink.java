@@ -5,6 +5,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import com.github.flash619.MountUp.Utils.SEVERE;
 
 import com.github.flash619.MountUp.MountUp;
+import com.github.flash619.MountUp.Core.StorageClasses.MountsTable.MountInfo;
 import com.github.flash619.MountUp.Reference.Mounts;
 
 public class ConfigLink {
@@ -19,12 +20,10 @@ public class ConfigLink {
 	 */
 	public void InitialLoad(){
 		final FileConfiguration config = plugin.getConfig();
-		if(Mounts.MountName!=null){
-		for(int l=0;l<Mounts.MountName.length; l++){
-		config.addDefault("General.AllowedMounts."+Mounts.MountName[l], true);
+		for(MountInfo mount:MountInfo.values()){
+		config.addDefault("General.AllowedMounts."+mount.getName(), true);
 		}
 		
-		}
 		config.addDefault("General.VerboseMode", false);
 		config.options().copyDefaults(true);
 		plugin.saveConfig();

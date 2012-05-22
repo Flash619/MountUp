@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import com.github.flash619.MountUp.Reference.Mounts;
+import com.github.flash619.MountUp.Core.StorageClasses.MountsTable.MountInfo;
 import com.github.flash619.MountUp.Utils.SEVERE;
 
 import com.github.flash619.MountUp.MountUp;
@@ -32,15 +32,15 @@ public class PlayerLink {
 	/**
 	 * @param player The player who's mounts are being looked up.
 	 * @return Returns a ArrayList of the players mounts as their ID's
-	 * To get the mounts names, use it in conjunction with Mounts.GetNames(ArrayListOfID's)
+	 * To get the mounts names.
 	 */
 	public static ArrayList<Integer> GetOwnedMounts(String player){
 		ArrayList<Integer> OwnedMounts = new ArrayList<Integer>();
 		if(ContainsPlayer(player)){
-			for(int i=0;i<Mounts.Mounts.length;i++){
+			for(MountInfo mount:MountInfo.values()){
 				try{
-				if(PlayerHasMount(player,Mounts.MountName[i])){
-					OwnedMounts.add(Mounts.Mounts[i]);
+				if(PlayerHasMount(player,mount.getName())){
+					OwnedMounts.add(mount.getId());
 				}
 				}catch(NullPointerException e){
 					

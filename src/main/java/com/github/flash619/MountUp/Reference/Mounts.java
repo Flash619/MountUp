@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.bukkit.entity.EntityType;
 
 import com.github.flash619.MountUp.MountUp;
+import com.github.flash619.MountUp.Core.StorageClasses.MountsTable.MountInfo;
 
 public class Mounts {
 	/*
@@ -18,43 +19,6 @@ public class Mounts {
 		public Mounts(MountUp plugin){
 
 		}
-		public static Integer[] Mounts = new Integer[]{         
-			//Enderdragon will no longer be listed here but
-			//instead as a seperate config entity.
-				95,//Wo14lf
-				52,//Spider
-				90,//Pig
-				91,//Sheep
-				92,//Cow
-			//	55,//Slime
-			//	62,//Magma Cube
-			//	96,//Mooshroom
-			//	56 //Ghast
-			};
-		public static String[] MountType = new String[]{
-			//This must always be linked to the above table! THESE SHOULD ALWAYS BE REFERENCED FROM THE BUKKIT JAVA DOC OF ENTITY NAMES
-			"WOLF",
-			"SPIDER",
-			"PIG",
-			"SHEEP",
-			"COW",
-		//	"SLIME",
-		//	"MAGMA_CUBE",
-		//	"MOOSHROOM",
-		//	"GHAST"
-		};
-	    public static String[] MountName = new String[]{
-	    	////This must always be linked to the above table!
-	    	"Wolf",
-	    	"Spider",
-	    	"Pig",
-	    	"Sheep",
-	    	"Cow",
-	    //	"Slime",
-	    //  "Magma Cube",
-	    //	"Mooshroom",
-	    //	"Ghast"
-	    };
 	    /**
 	     * @param IDList The Integer List of Mount ID's to convert to Names.
 	     * @return The list of names in the same order as the list of Integers.
@@ -62,11 +26,7 @@ public class Mounts {
 	    public static ArrayList<String> getMountNames(ArrayList<Integer> IDList){
 	    	ArrayList<String> MountNames = new ArrayList<String>();
 	    	if(!IDList.isEmpty()){
-	    		for(int i=0;i<Mounts.length;i++){
-	    			if(IDList.contains(Mounts[i])){
-	    				MountNames.add(MountName[i]);
-	    			}
-	    		}return MountNames;
+	    		MountNames = MountInfo.getMountNames(IDList);
 	    	}return MountNames;
 	    }
 	    /**
@@ -74,12 +34,9 @@ public class Mounts {
 	     * @return the name of the mount as a String.
 	     */
 	    public static String getMountName(Integer ID){
-	    	if(!ID.equals(null)){
-	    		for(int i=0;i<Mounts.length;i++){
-	    			if(ID.equals(Mounts[i])){
-	    				return MountName[i];
-	    			}
-	    		}return null;
+	    	if(ID!=null){
+	    		String name = MountInfo.getMountByID(ID).getName();
+	    		return name;
 	    	}return null;
 	    }
 	    /**
@@ -88,11 +45,9 @@ public class Mounts {
 	     */
 	    public static Integer getMountID(String Name){
 	    	Integer ID=null;
-	    	for(int i=0;i<MountName.length;i++){
-	    		if(Name.equalsIgnoreCase(MountName[i])){
-	    			ID = Mounts[i];
-	    			return ID;
-	    		}
+	    	if(Name!=null){
+	    		ID = MountInfo.getMountByName(Name).getId();
+	    		return ID;
 	    	}return ID;
 	    }
 		/**
@@ -100,35 +55,11 @@ public class Mounts {
 		 * @return The CreatureType
 		 */
 		public static EntityType getMountDurRef(Integer ID){
-			if(mountIsValidDur(ID)){
-				EntityType CreatureType = EntityType.fromName(MountType[getMountListPosition(ID)]);
+			if(MountInfo.isValidID(ID)){
+				EntityType CreatureType = EntityType.fromName(MountInfo.getMountByID(ID).name());
 				return CreatureType;
 			}
 			return null;
-		}
-		/**
-		 * @param ID The Durability ID of the mount for referencing.
-		 * @return The position of the MountID in the Mounts array.
-		 */
-		public static Integer getMountListPosition(Integer ID){
-			for(int i=0;i<Mounts.length;i++){
-				if(ID==Mounts[i]){
-					return i;
-				}
-			}
-			return null;
-		}
-		/**
-		 * @param ID The Durability ID of the mount for referencing.
-		 * @return Whether the mount is contained in the Mounts array.
-		 */
-		public static boolean mountIsValidDur(Integer ID){
-			for(int i=0;i<Mounts.length;i++){
-				if(ID==Mounts[i]){
-					return true;
-				}
-			}
-			return false;
 		}
 
 }

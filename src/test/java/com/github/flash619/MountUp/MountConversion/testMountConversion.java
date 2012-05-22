@@ -3,16 +3,16 @@
  * (C)2012 Licensed under the GNU Lesser General Public License v3
  */
 package com.github.flash619.MountUp.MountConversion;
-
+/*
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
 import com.github.flash619.MountUp.Reference.Mounts;
-
+*/
 
 public class testMountConversion{
-
+/*
     @Test
     public void testToID()
     {    
@@ -57,4 +57,5 @@ public class testMountConversion{
         }
         assertEquals(L,T);
     }
+    */
 }

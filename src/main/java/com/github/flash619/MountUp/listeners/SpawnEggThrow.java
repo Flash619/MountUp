@@ -5,6 +5,8 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -14,6 +16,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import com.github.flash619.MountUp.MountUp;
 import com.github.flash619.MountUp.Core.SummonMount;
 import com.github.flash619.MountUp.Core.MountCreation.SpawnEngine;
+import com.github.flash619.MountUp.Core.StorageClasses.MountsTable.MountInfo;
 import com.github.flash619.MountUp.Reference.Mounts;
 import com.github.flash619.MountUp.commands.IgnoreMounts;
 import com.github.flash619.MountUp.conf.ConfigLink;
@@ -55,6 +58,10 @@ public class SpawnEggThrow implements Listener{
 		    			PlayerLink.addPlayerMount(PlayerName, MountName);
 		    			SummonMount.startMount(player, IDI, SpawnLoc);
 		    			event.setCancelled(true);
+		    			PlayerInventory inventory = player.getInventory();
+		    			ItemStack SpawnEgg = new ItemStack(Material.MONSTER_EGG, 1);
+		    			SpawnEgg.setDurability(ID);
+		    			inventory.remove(SpawnEgg);
 		    		}else{
 		    			event.setCancelled(true);
 		    		}
@@ -76,8 +83,7 @@ public class SpawnEggThrow implements Listener{
 			Short ID = player.getItemInHand().getDurability();
 			Integer IDI = ID.intValue();
 			//if(Permissions.hasEggPerm(player, IDI)){ //TODO Remove the commented permission nodes upon release.
-			for(Integer i=0;i<Mounts.Mounts.length;i++){
-				if(IDI==Mounts.Mounts[i]){
+			if(MountInfo.isValidID(IDI)){
 					String MountName = Mounts.getMountName(IDI);
 					if(!PlayerLink.PlayerHasMount(PlayerName, MountName)&&(Config.isEnabledMount(IDI))){
 					return true;
@@ -85,7 +91,6 @@ public class SpawnEggThrow implements Listener{
 					return false;
 					}
 				}
-			}
 			return false;
 			//}else{
 			//	return false;
