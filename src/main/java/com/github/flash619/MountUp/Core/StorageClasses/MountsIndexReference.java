@@ -26,6 +26,22 @@ public class MountsIndexReference {
 			ActiveMounts.put(owner.getName(), AMI);
      }
      /**
+      * @param ID The ID of the mount to look for.
+      * @return Whether or not the mount is currently within the hash table.
+      */
+     public static boolean isMountID(Integer ID,Integer MID){ //MID for later use.
+    	 if(ID!=null){
+    	 Object[] AAMI = ActiveMounts.values().toArray();
+    	 for(int i=0;i<AAMI.length;i++){
+    		 ActiveMountsIndex PAMI = (ActiveMountsIndex) AAMI[i];
+    		 if(ID.equals(PAMI.MountEntityID)){
+    			 return true;
+    		 }
+    	 }return false;
+    	 }
+		return false;
+     }
+     /**
       * @param owner The player who's entry will be removed from the hash map.
       */
      public static void removeEntry(Player owner){
@@ -51,6 +67,26 @@ public class MountsIndexReference {
     		 return PAMI;
     	 }
     	 return null;
+     }
+     /**
+      * 
+      * @param ID The ID of the mount to look for.
+      * @return The owner as a Player Entity.
+      */
+     public static Player getMountOwner(Integer ID){
+    	 if(ID!=null){
+    	    	if(isMountID(ID,null)){//NULL for future use.
+    	    		Object[] AAMI = ActiveMounts.values().toArray();
+    	    		for(int i=0;i<AAMI.length;i++){
+    	    			ActiveMountsIndex PAMI = (ActiveMountsIndex) AAMI[i];
+    	    			if(ID.equals(PAMI.MountEntityID)){
+    	    				Player owner = PAMI.MountOwner;
+    	    				return owner;
+    	    			}
+    	    		}
+    	    	}
+    	    }
+		return null;
      }
      /**
       * @param owner The player to check and see if their mount is dead for.
@@ -85,7 +121,7 @@ public class MountsIndexReference {
      }
      /**
       * @param PAMI The ActiveMountsIndex object, PAMI, for the player.
-      * @param MID MID The Mount Identification Number.
+      * @param MID The Mount Identification Number.
       */
      public static void ejectPassenger(ActiveMountsIndex PAMI,Integer MID){ //MID for future use.
     	 if(hasPassenger(PAMI,null)){
@@ -113,5 +149,19 @@ public class MountsIndexReference {
     		 owner.sendMessage(ChatColor.DARK_PURPLE+"INFO: "+ChatColor.GOLD+"You don't have any active mounts.");
     	 }
      }
-
+     /**
+      * 
+      * @param ID The ID of the mount to look for.
+      * @param MID The Mount Identification Number.
+      */
+    public static void removeActiveMount(Integer ID,Integer MID){
+    	if(ID!=null){
+    	if(isMountID(ID,null)){//NULL for future use.
+    		Player owner = getMountOwner(ID);
+    			if(owner!=null){
+    				ActiveMounts.remove(owner.getName());
+    			}
+    		}
+    	}
+    }
 }

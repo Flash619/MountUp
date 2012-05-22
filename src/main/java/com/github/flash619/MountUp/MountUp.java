@@ -10,6 +10,7 @@ import com.github.flash619.MountUp.commands.IgnoreMounts;
 import com.github.flash619.MountUp.conf.ConfigLink;
 import com.github.flash619.MountUp.conf.PlayerLink;
 import com.github.flash619.MountUp.listeners.Login;
+import com.github.flash619.MountUp.listeners.MountDeath;
 import com.github.flash619.MountUp.listeners.MountSpawn;
 import com.github.flash619.MountUp.listeners.RightClickMount;
 import com.github.flash619.MountUp.listeners.SpawnEggThrow;
@@ -50,6 +51,7 @@ public class MountUp extends JavaPlugin{
 		MountInteractionDetection MountInteraction = new MountInteractionDetection(this);
 		MountSpawn NewMount = new MountSpawn(this);
 		RightClickMount MountToggle = new RightClickMount(this);
+		MountDeath OnMountDeath = new MountDeath(this);
 		    if(Config.isVerboseEnabled()){
 		   	    log.info("Initializing config objects");
 		    }
@@ -65,6 +67,7 @@ public class MountUp extends JavaPlugin{
 		Bukkit.getServer().getPluginManager().registerEvents(NewMount, this);
 		Bukkit.getServer().getPluginManager().registerEvents(MountToggle, this);
 		Bukkit.getServer().getPluginManager().registerEvents(MountInteraction, this);
+		Bukkit.getServer().getPluginManager().registerEvents(OnMountDeath, this);
 		getCommand("IgnoreMounts").setExecutor(IgnoreMountsExecutor);
 		getCommand("ClearMounts").setExecutor(ClearMountsExecutor);
 		getCommand("MountUp").setExecutor(MountUpExecutor);

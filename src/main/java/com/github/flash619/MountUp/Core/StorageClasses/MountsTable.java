@@ -12,7 +12,8 @@ public class MountsTable {
 		SPIDER("Spider",175,52),
 		PIG("Pig",100,90),
 		SHEEP("Sheep",50,91),
-		COW("Cow",50,92);
+		COW("Cow",50,92),
+		CHICKEN("Chicken",10,93);
 		
 		String name;
 		int speed;
